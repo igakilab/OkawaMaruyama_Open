@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>掲示板</title>
+  <style>
+    /* STEP名とサブタイトルのスタイル */
+    #problemTitle {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #problemSubtitle {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* コンテンツの2カラムレイアウト */
+    .content {
+      border: 2px solid green;
+      padding: 10px;
+      white-space: pre-wrap;
+      display: flex;
+      justify-content: space-between;
+      width: 1200px;
+      margin: 0 auto;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    .instructions {
+      width: 48%;
+      font-size: 16px;
+    }
+
+    .previous-code {
+      width: 48%;
+      border-left: 2px solid green;
+      padding-left: 10px;
+      font-size: 16px;
+    }
+
+    /* 実行例のスタイル */
+    .execution-example {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+
+    .editor-container {
+      margin: 20px;
+      border: 2px solid green;
+      padding: 10px;
+      width: 1200px;
+      position: center; 
+      margin: 0 auto;
+      width: 80%; /* 任意の幅を指定してください */ 
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .submit-button, .run-button {
+      width: 120px;
+      height: 50px;
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    .next-step-button {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- STEP名とサブタイトルを中央に配置 -->
+  <h1 id="problemTitle">STEP1 JUnitテストを実行</h1>
+  <h2 id="problemSubtitle">サブタイトル</h2>
+  
+  <!-- 2カラムレイアウトのコンテンツ -->
+  <div class="content">
+    <div class="instructions" id="problemDescription">
+      <!-- 問題の説明がここに表示される -->
+      <div class="execution-example">
+      </div>
+    </div>
+
+    <div class="previous-code" id="previousCode">
+      <!-- 前回のSTEPのコードがここに表示される -->
+      <b>前回のステップのコード:</b>
+      <pre>コードがありません</pre>
+    </div>
+  </div>
+
+  <div class="editor-container">
+    <!-- ファイル選択に変更 -->
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" id="javaFile" accept=".java"><br>
+      <button type="submit" class="submit-button">テスト</button>
+    </form>
+    <button id="nextStepButton" class="next-step-button">次のステップへ進む</button>
+  </div>
+
+  <h2>投稿一覧</h2>
+  <div id="posts"></div>
+
+  <h2>コンパイル結果</h2>
+  <pre id="compileResult" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>

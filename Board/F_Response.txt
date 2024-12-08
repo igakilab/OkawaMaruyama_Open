@@ -1,0 +1,525 @@
+## JavaClass
+Test01_1
+
+### mainメソッドを宣言
+```java
+public class Test01_1 {
+    public static void main(String[] args) {
+        //テスト用コード
+        System.out.println("mainメソッド");
+    }
+}
+```
+
+**実行例**
+$ java Test01_1
+mainメソッド
+
+## JavaClass
+Test01_2
+
+### ボールの数を入力し、5未満であれば再度入力を促す
+```java
+import java.util.Scanner;
+
+public class Test01_2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int length;
+        do {
+            System.out.println("ボールの数を入力してください(5以上)");
+            length = scanner.nextInt();
+        } while (length < 5);
+        
+        // テスト用の出力
+        System.out.println("入力されたボールの数: " + length);
+        
+        scanner.close();
+    }
+}
+```
+
+**実行例**
+$ java Test01_2
+ボールの数を入力してください(5以上)
+3 <-
+ボールの数を入力してください(5以上)
+5 <-
+入力されたボールの数: 5
+
+**実行例**
+$ java Test01_2
+ボールの数を入力してください(5以上)
+6 <-
+入力されたボールの数: 6
+
+## JavaClass
+Test01_3
+
+### ボールの色を入力し、異常入力に対応し再入力を促す
+```java
+import java.util.Scanner;
+
+public class Test01_3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int length;
+        do {
+            System.out.println("ボールの数を入力してください(5以上)");
+            length = scanner.nextInt();
+        } while (length < 5);
+        scanner.nextLine(); // 改行を消費
+        
+        String input;
+        boolean validInput;
+        do {
+            System.out.println("ボールの色を入力してください(例 pgrby)");
+            input = scanner.nextLine();
+            validInput = isValidInput(input, length);
+        } while (!validInput);
+        
+        // テスト用の出力
+        System.out.println("入力されたボールの色: " + input);
+        
+        scanner.close();
+    }
+    
+    public static boolean isValidInput(String input, int length) {
+        if (input.length() != length) {
+            System.out.println("入力された文字列の長さが" + length + "ではありません");
+            return false;
+        }
+        
+        int[] counts = countBalls(input);
+        int total = 0;
+        for (int count : counts) {
+            total += count;
+        }
+        
+        if (total != length) {
+            System.out.println("入力された文字列にrgbyp以外の文字が含まれています");
+            return false;
+        }
+        
+        for (int count : counts) {
+            if (count == 0) {
+                System.out.println("入力された文字列にrgbypすべてが含まれていません");
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static int[] countBalls(String input) {
+        int[] counts = new int[5];
+        for (char ball : input.toCharArray()) {
+            switch (ball) {
+                case 'r':
+                    counts[0]++;
+                    break;
+                case 'g':
+                    counts[1]++;
+                    break;
+                case 'b':
+                    counts[2]++;
+                    break;
+                case 'y':
+                    counts[3]++;
+                    break;
+                case 'p':
+                    counts[4]++;
+                    break;
+            }
+        }
+        return counts;
+    }
+}
+```
+
+**実行例**
+$ java Test01_3
+ボールの数を入力してください(5以上)
+5 <-
+ボールの色を入力してください(例 pgrby)
+pyg <- 
+入力された文字列の長さが5ではありません
+ボールの色を入力してください(例 pgrby)
+pygbt <- 
+入力された文字列にrgbyp以外の文字が含まれています
+ボールの色を入力してください(例 pgrby)
+pggyr <- 
+入力された文字列にrgbypすべてが含まれていません
+ボールの色を入力してください(例 pgrby)
+pygbr <- 
+入力されたボールの色: pygbr
+
+**実行例**
+$ java Test01_3
+ボールの数を入力してください(5以上)
+6 <-
+ボールの色を入力してください(例 pgrby)
+pygbt <- 
+入力された文字列にrgbyp以外の文字が含まれています
+ボールの色を入力してください(例 pgrby)
+pygbyr <- 
+入力された文字列にrgbypすべてが含まれていません
+ボールの色を入力してください(例 pgrby)
+pprgyb <- 
+入力されたボールの色: pprgyb
+
+## JavaClass
+Test01_4
+
+### 並べ替えゲームの開始メッセージと入力されたボールの状態を表示する
+```java
+import java.util.Scanner;
+
+public class Test01_4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int length;
+        do {
+            System.out.println("ボールの数を入力してください(5以上)");
+            length = scanner.nextInt();
+        } while (length < 5);
+        scanner.nextLine(); // 改行を消費
+        
+        String input;
+        boolean validInput;
+        do {
+            System.out.println("ボールの色を入力してください(例 pgrby)");
+            input = scanner.nextLine();
+            validInput = isValidInput(input, length);
+        } while (!validInput);
+        
+        char[] balls = input.toCharArray();
+        char[] target = { 'R', 'G', 'B', 'Y', 'P' };
+        char[] answer = generateCorrectArrangement(balls, target);
+
+        System.out.println("並べ替えゲームへようこそ");
+        System.out.println("ボールをRGBYPの順に並べ替えてください");
+        System.out.println("現在のボールの状態");
+        printBalls(balls);
+        
+        scanner.close();
+    }
+    
+    public static boolean isValidInput(String input, int length) {
+        if (input.length() != length) {
+            System.out.println("入力された文字列の長さが" + length + "ではありません");
+            return false;
+        }
+        
+        int[] counts = countBalls(input);
+        int total = 0;
+        for (int count : counts) {
+            total += count;
+        }
+        
+        if (total != length) {
+            System.out.println("入力された文字列にrgbyp以外の文字が含まれています");
+            return false;
+        }
+        
+        for (int count : counts) {
+            if (count == 0) {
+                System.out.println("入力された文字列にrgbypすべてが含まれていません");
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static int[] countBalls(String input) {
+        int[] counts = new int[5];
+        for (char ball : input.toCharArray()) {
+            switch (ball) {
+                case 'r':
+                    counts[0]++;
+                    break;
+                case 'g':
+                    counts[1]++;
+                    break;
+                case 'b':
+                    counts[2]++;
+                    break;
+                case 'y':
+                    counts[3]++;
+                    break;
+                case 'p':
+                    counts[4]++;
+                    break;
+            }
+        }
+        return counts;
+    }
+    
+    private static char[] generateCorrectArrangement(char[] balls, char[] target) {
+        int[] counts = countBalls(new String(balls));
+        char[] correctArrangement = new char[balls.length];
+        int index = 0;
+        
+        for (int i = 0; i < target.length; i++) {
+            for (int j = 0; j < counts[i]; j++) {
+                correctArrangement[index++] = Character.toLowerCase(target[i]);
+            }
+        }
+        
+        return correctArrangement;
+    }
+    
+    private static void printBalls(char[] balls) {
+        for (char ball : balls) {
+            System.out.print(ball + " ");
+        }
+        System.out.println();
+    }
+}
+```
+
+**実行例**
+$ java Test01_4
+ボールの数を入力してください(5以上)
+5 <-
+ボールの色を入力してください(例 pgrby)
+pygbr <-
+並べ替えゲームへようこそ
+ボールをRGBYPの順に並べ替えてください
+現在のボールの状態
+p y g b r 
+
+**実行例**
+$ java Test01_4
+ボールの数を入力してください(5以上)
+6 <-
+ボールの色を入力してください(例 pgrby)
+pygbyr <-
+並べ替えゲームへようこそ
+ボールをRGBYPの順に並べ替えてください
+現在のボールの状態
+p y g b y r 
+
+## JavaClass
+Test01_5
+
+### 2つのボールの位置を入れ替え、更新状態を表示する
+```java
+import java.util.Scanner;
+
+public class Test01_5 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int length;
+        do {
+            System.out.println("ボールの数を入力してください(5以上)");
+            length = scanner.nextInt();
+        } while (length < 5);
+        scanner.nextLine(); // 改行を消費
+        
+        String input;
+        boolean validInput;
+        do {
+            System.out.println("ボールの色を入力してください(例 pgrby)");
+            input = scanner.nextLine();
+            validInput = isValidInput(input, length);
+        } while (!validInput);
+        
+        char[] balls = input.toCharArray();
+        char[] target = { 'R', 'G', 'B', 'Y', 'P' };
+        char[] answer = generateCorrectArrangement(balls, target);
+
+        System.out.println("並べ替えゲームへようこそ");
+        System.out.println("ボールをRGBYPの順に並べ替えてください");
+
+        int moves = 0;
+        while (!isSorted(balls, answer)) {
+            System.out.println("現在のボールの状態");
+            printBalls(balls);
+        
+            System.out.println("交換する位置(0から" + (balls.length - 1) + "の番号)を2つ入力してください(例 0 1)");
+            int pos1 = scanner.nextInt();
+            int pos2 = scanner.nextInt();
+        
+            if (pos1 < 0 || pos1 >= balls.length || pos2 < 0 || pos2 >= balls.length) {
+                System.out.println("入力された位置が範囲外です");
+                continue;
+            }
+        
+            swap(balls, pos1, pos2);
+            moves++;
+        }
+        
+        System.out.println("現在のボールの状態");
+        printBalls(balls);
+        System.out.println("正解です");
+        System.out.println(moves + "回の操作で正しい順に並べました");
+        
+        scanner.close();
+    }
+    
+    public static boolean isValidInput(String input, int length) {
+        if (input.length() != length) {
+            System.out.println("入力された文字列の長さが" + length + "ではありません");
+            return false;
+        }
+        
+        int[] counts = countBalls(input);
+        int total = 0;
+        for (int count : counts) {
+            total += count;
+        }
+        
+        if (total != length) {
+            System.out.println("入力された文字列にrgbyp以外の文字が含まれています");
+            return false;
+        }
+        
+        for (int count : counts) {
+            if (count == 0) {
+                System.out.println("入力された文字列にrgbypすべてが含まれていません");
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static int[] countBalls(String input) {
+        int[] counts = new int[5];
+        for (char ball : input.toCharArray()) {
+            switch (ball) {
+                case 'r':
+                    counts[0]++;
+                    break;
+                case 'g':
+                    counts[1]++;
+                    break;
+                case 'b':
+                    counts[2]++;
+                    break;
+                case 'y':
+                    counts[3]++;
+                    break;
+                case 'p':
+                    counts[4]++;
+                    break;
+            }
+        }
+        return counts;
+    }
+    
+    private static char[] generateCorrectArrangement(char[] balls, char[] target) {
+        int[] counts = countBalls(new String(balls));
+        char[] correctArrangement = new char[balls.length];
+        int index = 0;
+        
+        for (int i = 0; i < target.length; i++) {
+            for (int j = 0; j < counts[i]; j++) {
+                correctArrangement[index++] = Character.toLowerCase(target[i]);
+            }
+        }
+        
+        return correctArrangement;
+    }
+    
+    private static boolean isSorted(char[] balls, char[] correctArrangement) {
+        boolean allMatch = true;
+        toLowerCase(balls);
+        
+        for (int i = 0; i < balls.length; i++) {
+            if (Character.toLowerCase(balls[i]) == correctArrangement[i]) {
+                balls[i] = Character.toUpperCase(balls[i]);
+            } else {
+                allMatch = false;
+            }
+        }
+        
+        return allMatch;
+    }
+    
+    private static void toLowerCase(char[] balls) {
+        for (int i = 0; i < balls.length; i++) {
+            balls[i] = Character.toLowerCase(balls[i]);
+        }
+    }
+    
+    private static void swap(char[] balls, int pos1, int pos2) {
+        char temp = balls[pos1];
+        balls[pos1] = balls[pos2];
+        balls[pos2] = temp;
+    }
+    
+    private static void printBalls(char[] balls) {
+        for (char ball : balls) {
+            System.out.print(ball + " ");
+        }
+        System.out.println();
+    }
+}
+```
+
+**実行例**
+$ java Test01_5
+ボールの数を入力してください(5以上)
+5 <-
+ボールの色を入力してください(例 pgrby)
+pygbr <-
+並べ替えゲームへようこそ
+ボールをRGBYPの順に並べ替えてください
+現在のボールの状態
+p y g b r 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+0 4 <-
+現在のボールの状態
+R y g b P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+1 2 <-
+現在のボールの状態
+R G y b P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+2 3 <-
+現在のボールの状態
+R G B Y P 
+正解です
+3回の操作で正しい順に並べました
+
+**実行例**
+$ java Test01_5
+ボールの数を入力してください(5以上)
+5 <-
+ボールの色を入力してください(例 pgrby)
+ybrgp <-
+並べ替えゲームへようこそ
+ボールをRGBYPの順に並べ替えてください
+現在のボールの状態
+y b r g P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+-1 1 <-
+入力された位置が範囲外です
+現在のボールの状態
+y b r g P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+1 5 <-
+入力された位置が範囲外です
+現在のボールの状態
+y b r g P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+0 3 <-
+現在のボールの状態
+g b r Y P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+1 2 <-
+現在のボールの状態
+g r B Y P 
+交換する位置(0から4の番号)を2つ入力してください(例 0 1)
+0 1 <-
+現在のボールの状態
+R G B Y P 
+正解です
+3回の操作で正しい順に並べました

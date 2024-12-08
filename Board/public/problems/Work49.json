@@ -1,0 +1,50 @@
+{
+  "Work49_1": {
+    "step": "STEP1 mainメソッドの宣言",
+    "subtitle": "mainメソッドを宣言",
+    "instructions": "1. `Work49_1`というクラスを作成します。  \n2. `main`メソッドをクラス内に宣言します。これはプログラムのエントリーポイントです。  \n3. `System.out.println()`を使用して、\"mainメソッド\"というメッセージをコンソールに出力します。このメッセージは、プログラムが正しく実行されていることを確認するためのものです。",
+    "expectedOutput": "$ java Work49_1<br>mainメソッド"
+  },
+  "Work49_2": {
+    "step": "STEP2 ユーザー入力機能の構築",
+    "subtitle": "ユーザーから身長(cm)と体重(kg)を入力する",
+    "instructions": "1. `Work49_2`というクラスを作成します。  \n2. `main`メソッドをクラス内に宣言します。  \n3. `java.util.Scanner`クラスを使用し、コンソールからユーザーの「身長」と「体重」を入力できるようにします。  \n4. \"身長(cm)と体重(kg)を入力してください\"というメッセージを `System.out.println()` で案内します。  \n5. `new Scanner(System.in)`を用いて、標準入力から情報を取得するための`Scanner`オブジェクトを作成します。  \n6. `scanner.close()`を使用し、終了時にリソースリークを防ぐためにScannerを閉じます。",
+    "expectedOutput": "$ java Work49_2<br>身長(cm)と体重(kg)を入力してください<br>入力テスト用表示: Scannerオブジェクトが適切に動作しています"
+  },
+  "Work49_3": {
+    "step": "STEP3 身長と体重の設定",
+    "subtitle": "身長と体重を設定する",
+    "instructions": "1. `Work49_3`というクラスを作成します。  \n2. `main`メソッドの中で`Scanner`オブジェクトを使用して、ユーザーから身長(cm)と体重(kg)を入力します。  \n3. `Integer.parseInt()`を用いて、入力された身長と体重の文字列を整数に変換し、それぞれ`height`と`weight`という変数に代入します。  \n4. 変数`height`と`weight`の値を`System.out.println()`を用いて出力し、入力された値を確認します。  \n5. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_3<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>身長: 175, 体重: 65<br><br>$ java Work49_3<br>身長(cm)と体重(kg)を入力してください<br>165 45 &lt;-<br>身長: 165, 体重: 45<br><br>$ java Work49_3<br>身長(cm)と体重(kg)を入力してください<br>180 90 &lt;-<br>身長: 180, 体重: 90"
+  },
+  "Work49_4": {
+    "step": "STEP4 calcBmiメソッドの宣言",
+    "subtitle": "calcBmiメソッドを宣言",
+    "instructions": "1. `Work49_4`というクラスを作成します。  \n2. `main`メソッドで、ユーザーから身長と体重を入力する処理を行います。  \n3. `calcBmi`という新たなメソッドを定義し、このメソッドには`height`と`weight`を引数に渡します。ただし、この時点では実寸の計算を行わず、0.0を返します。  \n4. `calcBmi`メソッドが呼ばれたことを示すメッセージを`System.out.println()`で出力します。  \n5. メソッドから返されたBMI値を`bmi`という変数に代入し、その後`System.out.println()`で出力して確認します。  \n6. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_4<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>calcBmiメソッドが呼び出されました<br>BMIの計算が呼び出されました: 0.0"
+  },
+  "Work49_5": {
+    "step": "STEP5 calcBmiメソッドの完成",
+    "subtitle": "calcBmiメソッドを作成",
+    "instructions": "1. `Work49_5`というクラスを作成します。  \n2. `main`メソッドで、ユーザーから身長と体重を入力する処理を行います。  \n3. `calcBmi`メソッドを完成させ、引数の`height`と`weight`を元にBMIを計算します。   \n  - BMIの計算式は以下の通りです: `weight`を`height`の2乗(cmからmに変換するため、100で割る)で割ります。小数を保持するために必要な型の変換も行います。  \n4. 計算したBMIを`double`型で返し、`bmi`という変数に代入します。  \n5. `System.out.println()`でBMI値を`String.format`を使って小数点第1位まで表示します。  \n6. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_5<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>BMIの計算が呼び出されました: 21.2"
+  },
+  "Work49_6": {
+    "step": "STEP6 evalWeightメソッドの宣言",
+    "subtitle": "evalWeightメソッドを宣言",
+    "instructions": "1. `Work49_6`というクラスを作成します。  \n2. `main`メソッドで、ユーザーから身長と体重を入力し、BMIを計算する処理を行います。  \n3. `evalWeight`というメソッドを新たに宣言し、`bmi`を引数として受け取ります。このメソッドはBMIに基づいて重みの評価を行います。  \n4. `evalWeight`メソッド内で、呼び出されたことを示すメッセージを`System.out.println()`で出力します。  \n5. `evalWeight`メソッドから返される重みの評価結果を`eval`という変数に代入し、`System.out.println()`で出力します。  \n6. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_6<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>evalWeightメソッドが呼び出されました<br>評価結果: 評価テスト"
+  },
+  "Work49_7": {
+    "step": "STEP7 evalWeightメソッドの完成",
+    "subtitle": "evalWeightメソッドを作成",
+    "instructions": "1. `Work49_7`というクラスを作成します。  \n2. `main`メソッドで、ユーザーから身長と体重を入力し、BMIを計算する処理を行います。  \n3. `evalWeight`メソッドを完成させ、BMIに基づいて重みの評価を行います。  \n  - BMIが18.5未満の場合は「低体重」とし、25以上の場合は「肥満」と判定します。  \n  - 上記のどちらでもない場合、BMIが18.5以上かつ25未満の場合は「普通体重」と判定します。  \n4. 判定された評価を`String`として`result`変数に格納し、メソッドの返り値として返します。  \n5. BMIの評価結果を`System.out.println()`で出力します。  \n6. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_7<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>評価結果: 普通体重"
+  },
+  "Work49_8": {
+    "step": "STEP8 完成したプログラムの統合",
+    "subtitle": "完成したmainメソッドに評価結果を統合",
+    "instructions": "1. `Work49_8`というクラスを作成します。  \n2. `main`メソッドで、ユーザーから身長と体重を入力し、BMIを計算した後、その評価を行う一連の処理を組み込みます。  \n3. 身長と体重、計算されたBMI、評価結果を`System.out.println()`を用いて出力します。   \n  - 出力は、「身長は[height]cmで体重が[weight]kgの場合BMIは[bmi]で「[評価結果]」です」にフォーマットします。  \n4. `scanner.close()`でScannerオブジェクトを閉じます。",
+    "expectedOutput": "$ java Work49_8<br>身長(cm)と体重(kg)を入力してください<br>175 65 &lt;-<br>身長は175cmで体重が65kgの場合BMIは21.2で「普通体重」です<br><br>$ java Work49_8<br>身長(cm)と体重(kg)を入力してください<br>165 45 &lt;-<br>身長は165cmで体重が45kgの場合BMIは16.5で「低体重」です<br><br>$ java Work49_8<br>身長(cm)と体重(kg)を入力してください<br>180 90 &lt;-<br>身長は180cmで体重が90kgの場合BMIは27.8で「肥満」です"
+  }
+}

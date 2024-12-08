@@ -1,0 +1,50 @@
+{
+  "Work49_1": {
+    "step": "STEP1 mainメソッドの宣言",
+    "subtitle": "プログラムのエントリーポイントの設定",
+    "instructions": "mainメソッドを宣言し、「mainメソッド実行」と出力させてください。",
+    "expectedOutput": "mainメソッド実行"
+  },
+  "Work49_2": {
+    "step": "STEP2 Scannerクラスのインスタンス作成",
+    "subtitle": "ユーザーの入力を受け取るための準備",
+    "instructions": "mainメソッド内でScannerクラスのインスタンスを作成し、標準入力からの読み取りを可能にします。「入力受付開始」と出力してください。",
+    "expectedOutput": "入力受付開始"
+  },
+  "Work49_3": {
+    "step": "STEP3 身長入力の受取とパース",
+    "subtitle": "ユーザーからの身長入力の受け取りと整数への変換",
+    "instructions": "ユーザーから身長の入力を受け取り、整数に変換して「入力された身長: XXXcm」と表示します。XXXはユーザーが入力した数値です。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 <- \n入力された身長: 170cm"
+  },
+  "Work49_4": {
+    "step": "STEP4 体重入力の受取とパース",
+    "subtitle": "ユーザーからの体重入力の受取と整数への変換",
+    "instructions": "続けて体重の入力を受け取り、整数に変換し、「身長はXXXcmで体重がYYYkgです」と出力します。XXXとYYYはユーザーが入力した数値です。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 65 <- \n身長は170cmで体重が65kgです"
+  },
+  "Work49_5": {
+    "step": "STEP5 calcBmiメソッドの宣言",
+    "subtitle": "BMI計算のためのメソッド定義",
+    "instructions": "calcBmiメソッドを宣言し、BMIを計算して「計算されたBMI: ZZZ」と出力します。ZZZは計算結果です。BMIの計算方法は体重kg÷(身長m)^2で、身長の単位はメートルです。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 65 <- \n計算されたBMI: 0.0"
+  },
+  "Work49_6": {
+    "step": "STEP6 calcBmiメソッドの実装",
+    "subtitle": "BMI計算式の適用",
+    "instructions": "calcBmiメソッド内で、具体的なBMI計算式を適用し、計算結果を小数第一位まで表示するようにします。「計算されたBMI: ZZZ」と出力します。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 65 <- \n計算されたBMI: 22.5"
+  },
+  "Work49_7": {
+    "step": "STEP7 evalWeightメソッドの宣言および仮実装",
+    "subtitle": "BMIに基づく体重評価の方法定義",
+    "instructions": "evalWeightメソッドを宣言し、BMIを基に体重が「評価中」と出力される仮の実装を行います。「BMIからの評価: 評価」と表示します。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 65 <- \nBMIからの評価: 評価中"
+  },
+  "Work49_8": {
+    "step": "STEP8 evalWeightメソッドの正式な実装",
+    "subtitle": "BMI指数に基づき体重を評価",
+    "instructions": "evalWeightメソッド内でBMIが18.5未満では「低体重」、25以上では「肥満」、それ以外では「普通体重」と評価し出力します。出力は「身長はXXXcmで体重がYYYkgの場合BMIはZZZで「評価結果」です」とします。",
+    "expectedOutput": "身長(cm)と体重(kg)を入力してください\n170 65 <- \n身長は170cmで体重が65kgの場合BMIは22.5で「普通体重」です"
+  }
+}

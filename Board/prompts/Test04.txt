@@ -1,0 +1,207 @@
+## 仕様
+### High and Lowの概要
+- High and Low とはトランプを一枚ずつめくり,現在のカードに対して次のカードが大きい(`high`)か小さい(`low`)かを予想するゲームである.
+- 最大2回チャレンジできる.
+- 3枚のトランプの手を入力すると,ゲームに挑戦できる.
+- ユーザは勝負を降りることもできる.
+- High/Lowを当てると勝利カウントが増え,失敗すると敗北カウントが増える.
+- 2回のチャレンジが終了するか,勝負を降りるとゲームが終了する.
+- 最後に挑戦結果が表示される.
+
+### High and Low の入出力の流れ
+- ゲーム開始前
+  - ユーザは High and Low で配るトランプの手を3桁の数字で3回入力する(スペース区切り).
+    - 想定されない入力については考慮しなくて良い(以降,例外対応が明記されていない場合は実装しなくとも良い).
+  - CPUは High and Low の開始を表示する.
+- ゲーム中
+  - 以下の処理を最大2回繰り返す.
+    - CPUが現在のトランプのカードを提示する.
+      - トランプのカード番号表記`A`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9`,`10`,`J`,`Q`,`K`のいずれかを表示する.
+      - CPUは最初に入力された3桁の数値を13で割った余りを対応する`A`～`K`に変換して表示する.次の「カードの対応表」にて対応関係の表を示す.
+    - ユーザは`high`/`low`/`exit`を文字で入力する.
+      - `high` `low` `exit`以外が入力されたときは無条件でユーザの予想失敗となる.
+      - `exit`が入力されると勝負を降りることができる
+    - CPUは次のカードをユーザに提示し,勝ち負け引き分けのいずれかの結果を提示する.
+      - 予想成功は勝ち(`win`)とする.
+      - 予想失敗は負け(`lose`)とする.
+      - 現在のカードと次のカードが同じ場合は引き分け(`draw`)とする.
+- ゲーム終了後
+  - 勝敗引き分け(`win`, `lose`, `draw`)の回数を表示する.
+
+### カードの対応表
+
+13で割った剰余|0|1|2|3|4|5|6|7|8|9|10|11|12
+---|---|---|---|---|---|---|---|---|---|---|---|---|---
+カード|`A`|`2`|`3`|`4`|`5`|`6`|`7`|`8`|`9`|`10`|`J`|`Q`|`K`
+
+import java.util.Scanner;
+
+/**
+ * High&Lowとはトランプを一枚ずつめくり,現在のカードに対して次のカードが大きい(high)か小さい(low)かを予想するゲームである
+ */
+public class Test04 {
+  public static void main(String[] args) {
+    System.out.println("「3桁以上の数字を3つ入力してください」");
+    Scanner sc = new Scanner(System.in);
+    int[] cardNum = new int[3];
+
+    for (int i = 0; i < 3; i++) {
+      cardNum[i] = Integer.parseInt(sc.next()) % 13;
+    }
+    System.out.println("High and Low Start");
+
+    int win = 0, lose = 0, draw = 0;
+
+    for (int i = 0; i < 2; i++) {
+      System.out.print("現在の");
+      drawCardNum(cardNum[i]);
+
+      System.out.println("「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」");
+      String userHand = sc.next();
+
+      if (userHand.equalsIgnoreCase("exit")) {
+        System.out.println("ゲームを終了します");
+        break;
+      }
+
+      System.out.print("次の");
+      drawCardNum(cardNum[i + 1]);
+      String result = judgeResult(userHand, cardNum[i], cardNum[i + 1]);
+
+      switch (result) {
+        case "win":
+          win++;
+          System.out.println("あなたの勝ちです");
+          break;
+        case "lose":
+          lose++;
+          System.out.println("あなたの負けです");
+          break;
+        case "draw":
+          draw++;
+          System.out.println("引き分けです");
+          break;
+      }
+    }
+
+    System.out.println("ゲーム終了");
+    showResults(win, lose, draw);
+    sc.close();
+  }
+
+  // userHand: high or low，first:現在のカード，second:次のカード
+  static String judgeResult(String userHand, int first, int second) {
+    if (userHand.equals("high")) {
+      if (second - first > 0) {
+        return "win";
+      } else if (second == first) {
+        return "draw";
+      } else {
+        return "lose";
+      }
+    } else if (userHand.equals("low")) {
+      if (second - first < 0) {
+        return "win";
+      } else if (second == first) {
+        return "draw";
+      } else {
+        return "lose";
+      }
+    } else {
+      return "lose";// 入力がhighでもlowでもない場合
+    }
+  }
+
+  // 勝敗引き分けの数を表示する
+  static void showResults(int win, int lose, int draw) {
+    System.out.println("勝敗引き分けの数");
+    System.out.println(" win:" + win);
+    System.out.println(" lose:" + lose);
+    System.out.println(" draw:" + draw);
+  }
+
+  // 0~12までの数字をトランプのA～Kまでに変換して返す
+  static void drawCardNum(int num) {
+    System.out.print("カードは");
+    switch (num) {
+      case 0:
+        System.out.print("A");
+        break;
+      case 10:
+        System.out.print("J");
+        break;
+      case 11:
+        System.out.print("Q");
+        break;
+      case 12:
+        System.out.print("K");
+        break;
+      default:
+        System.out.print(num + 1);
+    }
+    System.out.println("です");
+  }
+}
+
+
+### 実行例(1)
+$ Java Test01
+「3桁以上の数字を3つ入力してください」
+100 200 300  <-
+High and Low Start
+現在のカードは10です
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+high  <-
+次のカードは6です
+あなたの負けです
+現在のカードは6です
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+exit  <-
+ゲームを終了します
+ゲーム終了
+勝敗引き分けの数
+ win:0
+ lose:1
+ draw:0
+
+### 実行例(2)
+$ Java Test01
+「3桁以上の数字を3つ入力してください」
+123 234 345  <-
+High and Low Start
+現在のカードは7です
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+low  <-
+次のカードはAです
+あなたの勝ちです
+現在のカードはAです
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+low  <-
+次のカードは8です
+あなたの負けです
+ゲーム終了
+勝敗引き分けの数
+ win:0
+ lose:2
+ draw:0
+
+### 実行例(3)
+$ Java Test01
+「3桁以上の数字を3つ入力してください」
+100 100 200  <-
+High and Low Start
+現在のカードは10です
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+high  <-
+次のカードは10です
+引き分けです
+現在のカードは10です
+「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」
+hibh  <-
+次のカードは6です
+あなたの負けです
+ゲーム終了
+勝敗引き分けの数
+ win:0
+ lose:1
+ draw:1

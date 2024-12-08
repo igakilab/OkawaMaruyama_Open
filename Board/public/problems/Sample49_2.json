@@ -1,0 +1,50 @@
+{
+  "Work49_1": {
+    "step": "STEP1 mainメソッドの宣言",
+    "subtitle": "プログラムのエントリーポイントの設定",
+    "instructions": "mainメソッドを宣言し、「mainメソッド」と出力させてください。",
+    "expectedOutput": "mainメソッド"
+  },
+  "Work49_2": {
+    "step": "STEP2 Scannerのインポートと初期化",
+    "subtitle": "ユーザーからの入力を受け取るための準備",
+    "instructions": "mainメソッド内でjava.util.Scannerオブジェクトを初期化し、「入力用のScannerクラスが初期化されました。」と出力してください。",
+    "expectedOutput": "入力用のScannerクラスが初期化されました。"
+  },
+  "Work49_3": {
+    "step": "STEP3 身長と体重の入力を受け取る",
+    "subtitle": "ユーザーの身体データの入力",
+    "instructions": "Scannerを使って、「身長(cm)と体重(kg)を入力してください」と出力後、ユーザーの入力を二つの整数として受け取ってください。",
+    "expectedOutput": "160 60 <-"
+  },
+  "Work49_4": {
+    "step": "STEP4 calcBmiメソッドを宣言",
+    "subtitle": "BMI計算のためのメソッド作成",
+    "instructions": "calcBmiメソッドを宣言し、ダミーの「calcBmiメソッド」という出力をしてください。",
+    "expectedOutput": "160 60 <-\ncalcBmiメソッドが呼ばれます"
+  },
+  "Work49_5": {
+    "step": "STEP5 BMI計算ロジックを実装",
+    "subtitle": "正確なBMIの計算",
+    "instructions": "calcBmiメソッド内で、与えられた身長と体重からBMIを計算して、計算結果を返すコードを実装してください。",
+    "expectedOutput": "160 60 <-"
+  },
+  "Work49_6": {
+    "step": "STEP6 evalWeightメソッドを宣言と呼び出し",
+    "subtitle": "体重の評価メソッドの初期宣言とテスト",
+    "instructions": "evalWeightメソッドを宣言し、「evalWeightメソッド」と出力してください。また、このメソッドをmainメソッドから呼び出し、実際に出力を確認してください。",
+    "expectedOutput": "160 60 <-\nevalWeightメソッド"
+  },
+  "Work49_7": {
+    "step": "STEP7 evalWeightメソッドの実装",
+    "subtitle": "体重評価のロジックの完成",
+    "instructions": "evalWeightメソッドを完成させ、BMIに応じて「低体重」「普通体重」「肥満」と評価して返すようにしてください。",
+    "expectedOutput": "160 60 <-\n普通体重\n155 50 <-\n低体重\n180 100 <-\n肥満"
+  },
+  "Work49_8": {
+    "step": "STEP8 最終結果の表示とScannerのクローズ",
+    "subtitle": "結果の整理とリソースの管理",
+    "instructions": "計算したBMIと評価結果を整理して出力し、プログラムの最後にScannerを閉じてください。",
+    "expectedOutput": "160 60 <-\n身長は160cmで体重が60kgの場合BMIは22.0で「普通体重」です"
+  }
+}
