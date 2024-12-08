@@ -1,0 +1,50 @@
+
+[テスト失敗ファイル] com.example.Work48_5Test.txt:
+-------------------------------------------------------------------------------
+Test set: com.example.Work48_5Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.01 s <<< FAILURE! - in com.example.Work48_5Test
+testExample1  Time elapsed: 0.01 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+expected: <isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+... (snip)
+isTriangleメソッドが呼び出されました> but was: <isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました
+isTriangleメソッドが呼び出されました>
+	at com.example.Work48_5Test.testExample1(Work48_5Test.java:34)
+
+

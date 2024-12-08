@@ -1,0 +1,45 @@
+/* public/style.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  margin: 20px auto;
+  width: 300px;
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+}
+
+input[type="file"] {
+  margin: 10px 0;
+}
+
+.post {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px auto;
+  width: 300px;
+}
+
+.post p {
+  margin: 0;
+}
+
+.post a {
+  display: block;
+  margin-top: 5px;
+}
+
+#editor {
+  width: 1000px; /* エディターの幅を指定（80%など適切な値を設定） */
+  height: 500px; /* 必要に応じて高さを指定 */  
+}
+

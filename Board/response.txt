@@ -1,0 +1,635 @@
+### JavaClass
+Test06_1
+
+### mainメソッドの宣言
+```java
+import java.util.Scanner;
+
+public class Test06_1 {
+  public static void main(String[] args) {
+    //テスト用コード
+    System.out.println("mainメソッド");
+  }
+}
+```
+
+**実行例**
+$ java Test06_1
+mainメソッド
+
+### JavaClass
+Test06_2
+
+### タイトルを表示
+```java
+import java.util.Scanner;
+
+public class Test06_2 {
+  public static void main(String[] args) {
+    // タイトルの表示
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+    
+    // テスト用コード
+    System.out.println("タイトルが表示されました");
+  }
+}
+```
+
+**実行例**
+$ java Test06_2
+
+Hit&Blow
+
+タイトルが表示されました
+
+### JavaClass
+Test06_3
+
+### ゲームを続けるためのループを宣言
+```java
+import java.util.Scanner;
+
+public class Test06_3 {
+  public static void main(String[] args) {
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+      // テスト用コード
+      System.out.println("ループ内");
+      conti = false; // 仮でループを一回で終了
+    }
+    
+    scanner.close();
+  }
+}
+```
+
+**実行例**
+$ java Test06_3
+
+Hit&Blow
+
+ループ内
+
+### JavaClass
+Test06_4
+
+### 答えの生成ロジックを作成
+```java
+import java.util.Scanner;
+
+public class Test06_4 {
+  public static void main(String[] args) {
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+      int numberOfAnswers = 3; // 答えの数字の数を固定
+      int[] answer = new int[numberOfAnswers]; // 答えが入る
+      while (true) {
+        System.out.println("一意な整数を3つ入力してください（例: 12 34 56）:");
+        int input1 = scanner.nextInt();
+        int input2 = scanner.nextInt();
+        int input3 = scanner.nextInt();
+
+        answer[0] = (input1 % 9) + 1;
+        answer[1] = (input2 % 9) + 1;
+        answer[2] = (input3 % 9) + 1;
+
+        // 重複チェック
+        if(answer[0] != answer[1] && answer[1] != answer[2] && answer[0] != answer[2]){
+          break;
+        } else {
+          System.out.println("生成された数字が重複しています。別の値を入力してください。");
+        }
+      }
+
+      // テスト用コード
+      System.out.println("答えの生成ロジック完了: " + answer[0] + ", " + answer[1] + ", " + answer[2]);
+      conti = false; // 仮でループを一回で終了
+    }
+    
+    scanner.close();
+  }
+}
+```
+
+**実行例**
+$ java Test06_4
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+答えの生成ロジック完了: 2, 3, 4
+
+### JavaClass
+Test06_5
+
+### ゲームロジックの雛形を作成
+```java
+import java.util.Scanner;
+
+public class Test06_5 {
+  public static void main(String[] args) {
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+      int numberOfAnswers = 3; // 答えの数字の数を固定
+      int[] answer = new int[numberOfAnswers]; // 答えが入る
+      while (true) {
+        System.out.println("一意な整数を3つ入力してください（例: 12 34 56）:");
+        int input1 = scanner.nextInt();
+        int input2 = scanner.nextInt();
+        int input3 = scanner.nextInt();
+
+        answer[0] = (input1 % 9) + 1;
+        answer[1] = (input2 % 9) + 1;
+        answer[2] = (input3 % 9) + 1;
+
+        // 重複チェック
+        if(answer[0] != answer[1] && answer[1] != answer[2] && answer[0] != answer[2]){
+          break;
+        } else {
+          System.out.println("生成された数字が重複しています。別の値を入力してください。");
+        }
+      }
+
+      // ゲーム部
+      System.out.println("数字を" + numberOfAnswers + "個SPACE区切りで入力してください");
+      int count = 0; // チャレンジ回数
+      int[] input = new int[numberOfAnswers]; // 入力が入る
+      int hit = 0; // ヒットの数
+      int blow = 0; // ブローの数
+
+      count++;
+      System.out.println("[" + count + "回目]");
+
+      // 入力値を取得
+      for (int i = 0; i < numberOfAnswers; i++) {
+        input[i] = scanner.nextInt();
+      }
+
+      // 答え判断
+      hit = 0;
+      blow = 0;
+      for (int i = 0; i < numberOfAnswers; i++) {
+        for (int j = 0; j < numberOfAnswers; j++) {
+          if (i == j && input[i] == answer[j]) {
+            hit++;
+          } else if (input[i] == answer[j]) {
+            blow++;
+          }
+        }
+      }
+
+      // テスト用コード
+      System.out.println("ゲームロジックの雛形完了");
+      conti = false; // 仮でループを一回で終了
+    }
+    
+    scanner.close();
+  }
+}
+```
+
+**実行例**
+$ java Test06_5
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+2 3 4 <-
+ゲームロジックの雛形完了
+
+### JavaClass
+Test06_6
+
+### ヒント機能の追加
+```java
+import java.util.Scanner;
+
+public class Test06_6 {
+  public static void main(String[] args) {
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+      int numberOfAnswers = 3; // 答えの数字の数を固定
+      int[] answer = new int[numberOfAnswers]; // 答えが入る
+      while (true) {
+        System.out.println("一意な整数を3つ入力してください（例: 12 34 56）:");
+        int input1 = scanner.nextInt();
+        int input2 = scanner.nextInt();
+        int input3 = scanner.nextInt();
+
+        answer[0] = (input1 % 9) + 1;
+        answer[1] = (input2 % 9) + 1;
+        answer[2] = (input3 % 9) + 1;
+
+        // 重複チェック
+        if(answer[0] != answer[1] && answer[1] != answer[2] && answer[0] != answer[2]){
+          break;
+        } else {
+          System.out.println("生成された数字が重複しています。別の値を入力してください。");
+        }
+      }
+
+      // ゲーム部
+      System.out.println("数字を" + numberOfAnswers + "個SPACE区切りで入力してください");
+      int count = 0; // チャレンジ回数
+      while(true) {
+        int[] input = new int[numberOfAnswers]; // 入力が入る
+        int hit = 0; // ヒットの数
+        int blow = 0; // ブローの数
+
+        count++;
+        System.out.println("[" + count + "回目]");
+
+        // 入力値を取得
+        for (int i = 0; i < numberOfAnswers; i++) {
+          input[i] = scanner.nextInt();
+        }
+
+        // 答え判断
+        hit = 0;
+        blow = 0;
+        for (int i = 0; i < numberOfAnswers; i++) {
+          for (int j = 0; j < numberOfAnswers; j++) {
+            if (i == j && input[i] == answer[j]) {
+              hit++;
+            } else if (input[i] == answer[j]) {
+              blow++;
+            }
+          }
+        }
+
+        // ヒント表示
+        System.out.print("ヒント: ");
+        for (int i = 0; i < numberOfAnswers; i++) {
+          printHinto(input[i], answer[i]);
+        }
+        System.out.println();
+
+        // 終了判断
+        System.out.println("Hit:" + hit + " Blow:" + blow);
+        if (hit == numberOfAnswers) {
+          System.out.println("おめでとう！ 答えを正解しました！");
+          break;
+        } else {
+          System.out.println();
+        }
+      }
+      
+      conti = false; // 仮でループを一回で終了
+    }
+    
+    scanner.close();
+  }
+
+  public static void printHinto(int in, int ans) {
+    if (in == 0) {
+      System.out.print(ans + " ");
+    } else {
+      System.out.print(in + " ");
+    }
+  }
+}
+```
+
+**実行例**
+$ java Test06_6
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+2 3 4 <-
+ヒント: 2 3 4
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+
+### JavaClass
+Test06_7
+
+### ゲームの再挑戦機能を作成
+```java
+import java.util.Scanner;
+
+public class Test06_7 {
+  public static void main(String[] args) {
+    String title = "\nHit&Blow\n";
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+      int numberOfAnswers = 3; // 答えの数字の数を固定
+      int[] answer = new int[numberOfAnswers]; // 答えが入る
+      while (true) {
+        System.out.println("一意な整数を3つ入力してください（例: 12 34 56）:");
+        int input1 = scanner.nextInt();
+        int input2 = scanner.nextInt();
+        int input3 = scanner.nextInt();
+
+        answer[0] = (input1 % 9) + 1;
+        answer[1] = (input2 % 9) + 1;
+        answer[2] = (input3 % 9) + 1;
+
+        // 重複チェック
+        if(answer[0] != answer[1] && answer[1] != answer[2] && answer[0] != answer[2]){
+          break;
+        } else {
+          System.out.println("生成された数字が重複しています。別の値を入力してください。");
+        }
+      }
+
+      // ゲーム部
+      System.out.println("数字を" + numberOfAnswers + "個SPACE区切りで入力してください");
+      int count = 0; // チャレンジ回数
+      while(true) {
+        int[] input = new int[numberOfAnswers]; // 入力が入る
+        int hit = 0; // ヒットの数
+        int blow = 0; // ブローの数
+
+        count++;
+        System.out.println("[" + count + "回目]");
+
+        // 入力値を取得
+        for (int i = 0; i < numberOfAnswers; i++) {
+          input[i] = scanner.nextInt();
+        }
+
+        // 答え判断
+        hit = 0;
+        blow = 0;
+        for (int i = 0; i < numberOfAnswers; i++) {
+          for (int j = 0; j < numberOfAnswers; j++) {
+            if (i == j && input[i] == answer[j]) {
+              hit++;
+            } else if (input[i] == answer[j]) {
+              blow++;
+            }
+          }
+        }
+
+        // ヒント表示
+        System.out.print("ヒント: ");
+        for (int i = 0; i < numberOfAnswers; i++) {
+          printHinto(input[i], answer[i]);
+        }
+        System.out.println();
+
+        // 終了判断
+        System.out.println("Hit:" + hit + " Blow:" + blow);
+        if (hit == numberOfAnswers) {
+          System.out.println("おめでとう！ 答えを正解しました！");
+          break;
+        } else {
+          System.out.println();
+        }
+      }
+
+      // ゲームを続けるか確認
+      System.out.println("ゲームを続けますか?[yes/no]");
+      scanner.nextLine(); // 改行読み飛ばし
+      String ans = scanner.nextLine();
+      conti = checkContinue(ans);
+    }
+    
+    scanner.close();
+  }
+
+  public static boolean checkContinue(String ans) {
+    return ans.equals("yes");
+  }
+
+  public static void printHinto(int in, int ans) {
+    if (in == 0) {
+      System.out.print(ans + " ");
+    } else {
+      System.out.print(in + " ");
+    }
+  }
+}
+```
+
+**実行例**
+$ java Test06_7
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+2 3 4 <-
+ヒント: 2 3 4
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+ゲームを続けますか?[yes/no]
+no <-
+
+### JavaClass
+Test06_8
+
+### 完成したコード
+```java
+import java.util.Scanner;
+
+public class Test06_8 {
+  public static void main(String[] args) {
+    // タイトルの表示
+    String title = "\nHit&Blow\n"; // タイトル
+    System.out.println(title);
+
+    Scanner scanner = new Scanner(System.in);
+
+    boolean conti = true; // ゲームを続けるかどうかを判定
+    while (conti) {
+
+      int numberOfAnswers = 3; // 答えの数字の数を固定
+      int[] answer = new int[numberOfAnswers]; // 答えが入る
+
+      // 答えの生成ロジック
+      while (true) {
+        System.out.println("一意な整数を3つ入力してください（例: 12 34 56）:");
+        int input1 = scanner.nextInt();
+        int input2 = scanner.nextInt();
+        int input3 = scanner.nextInt();
+
+        answer[0] = (input1 % 9) + 1;
+        answer[1] = (input2 % 9) + 1;
+        answer[2] = (input3 % 9) + 1;
+
+        // 重複チェック
+        if(answer[0] != answer[1] && answer[1] != answer[2] && answer[0] != answer[2]){
+          break;
+        } else {
+          System.out.println("生成された数字が重複しています。別の値を入力してください。");
+        }
+      }
+
+      // ゲーム部
+      System.out.println("数字を" + numberOfAnswers + "個SPACE区切りで入力してください");
+      int count = 0; // チャレンジ回数
+      while (true) {
+        int[] input = new int[numberOfAnswers]; // 入力が入る
+        int hit = 0; // ヒットの数
+        int blow = 0; // ブローの数
+
+        count++;
+        System.out.println("[" + count + "回目]");
+
+        // 入力値を取得
+        for (int i = 0; i < numberOfAnswers; i++) {
+          input[i] = scanner.nextInt();
+        }
+
+        // 答え判断
+        hit = 0;
+        blow = 0;
+        for (int i = 0; i < numberOfAnswers; i++) {
+          for (int j = 0; j < numberOfAnswers; j++) {
+            if (i == j && input[i] == answer[j]) {
+              hit++;
+            } else if (input[i] == answer[j]) {
+              blow++;
+            }
+          }
+        }
+
+        // ヒント表示
+        System.out.print("ヒント: ");
+        for (int i = 0; i < numberOfAnswers; i++) {
+          printHinto(input[i], answer[i]);
+        }
+        System.out.println();
+
+        // 終了判断
+        System.out.println("Hit:" + hit + " Blow:" + blow);
+        if (hit == numberOfAnswers) {
+          System.out.println("おめでとう！ 答えを正解しました！");
+          break;
+        } else {
+          System.out.println();
+        }
+      }
+
+      // ゲームを続けるか確認
+      System.out.println("ゲームを続けますか?[yes/no]");
+      scanner.nextLine(); // 改行読み飛ばし
+      String ans = scanner.nextLine();
+      conti = checkContinue(ans);
+    }
+
+    scanner.close();
+  }
+
+  public static boolean checkContinue(String ans) {
+    return ans.equals("yes");
+  }
+
+  public static void printHinto(int in, int ans) {
+    if (in == 0) {
+      System.out.print(ans + " ");
+    } else {
+      System.out.print(in + " ");
+    }
+  }
+}
+```
+
+**実行例**
+$ java Test06_8
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+2 3 4 <-
+ヒント: 2 3 4
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+ゲームを続けますか?[yes/no]
+no <-
+
+**実行例**
+$ java Test06_8
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+12 23 34 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+1 2 3 <-
+ヒント: 1 2 3
+Hit:0 Blow:0
+
+[2回目]
+4 5 6 <-
+ヒント: 4 5 6
+Hit:1 Blow:1
+
+[3回目]
+4 7 8 <-
+ヒント: 4 7 8
+Hit:2 Blow:0
+
+[4回目]
+4 6 8 <-
+ヒント: 4 6 8
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+ゲームを続けますか?[yes/no]
+no <-
+
+**実行例**
+$ java Test06_8
+
+Hit&Blow
+
+一意な整数を3つ入力してください（例: 12 34 56）:
+10 20 30 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+2 3 4 <-
+ヒント: 2 3 4
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+ゲームを続けますか?[yes/no]
+yes <-
+一意な整数を3つ入力してください（例: 12 34 56）:
+25 50 75 <-
+数字を3個SPACE区切りで入力してください
+[1回目]
+0 0 0 <-
+ヒント: 8 6 4
+Hit:0 Blow:0
+
+[2回目]
+8 6 4 <-
+ヒント: 8 6 4
+Hit:3 Blow:0
+おめでとう！ 答えを正解しました！
+ゲームを続けますか?[yes/no]
+no <-

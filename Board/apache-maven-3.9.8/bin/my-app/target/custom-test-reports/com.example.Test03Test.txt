@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.Test03Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.02 s <<< FAILURE! - in com.example.Test03Test
+testMainMethod  Time elapsed: 0.02 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Output did not match expected result ==> expected: <「3桁以上の数字を3つ入力してください」 High and Low Start 現在のカードは7です 「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」 次のカードはAです あなたの負けです 現在のカードはAです 「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」 次のカードは8です あなたの負けです ゲーム終了 勝敗引き分けの数 win:0 lose:2 draw:0> but was: <「3桁以上の数字を3つ入力してください」 High and Low Start 現在のカードは7です 「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」 次のカードはAです あなたの負けです 現在のカードはAです 「次のカードがhighかlowかあなたの予想を入力してください (降りる場合はexitと入力してください)」 次のカードは8です あなたの勝ちです ゲーム終了 勝敗引き分けの数 win:1 lose:1 draw:0>
+	at com.example.Test03Test.testMainMethod(Test03Test.java:41)
+
