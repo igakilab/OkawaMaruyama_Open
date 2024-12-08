@@ -1,0 +1,213 @@
+## 仕様
+### CPUと対戦するじゃんけんゲームの概要
+- 何回戦戦うか最初に決定し,その回数分のCPUの手を数値で入力すると,プレイヤーの手にあわせてCPUとじゃんけんを複数回対戦できる
+- 最後に対戦結果が表示される
+
+### じゃんけんゲームの入出力の流れ
+- ユーザはじゃんけんを何回実施するか入力する
+  - 0以下の整数値が入力されたときは入力をやり直させる
+- ユーザはCPUの手として,任意の数値を指定した何回戦の数値分だけ入力する（スペース区切り）
+  - CPUの手は任意の数字を3で割った余りから決定される
+    - 余りが0のときはgu, 1のときはchoki, 2のときはpaとする
+    - 例えば10が入力されると3で割ると余りが1なのでchokiとなる
+  - 負の数が含まれていた場合,その数を正の数に変換する
+    - 例えば「`3 -1 5`」と入力すると「`3 1 5`」と入力されたことになる
+- 次に以下の処理をユーザが入力したじゃんけんの回数だけ繰り返す
+  - プログラムはCPUの手を1つずつ決定し,じゃんけんをスタートする
+  - ユーザは自分の手を gu choki pa のいずれかで入力する
+    - gu choki pa以外が入力されたときは無条件でユーザの負けとなる
+  - プログラムはCPUの手とユーザの手を比較し,結果を表示する。同時に勝敗を記録する
+- 最初に入力した回数じゃんけんが行われたら,プログラムが勝敗の合計を表示する
+
+import java.util.Scanner;
+
+public class Test01 {
+  public static void main(String[] args) {
+    System.out.println("[じゃんけんゲームを何回戦実施するか入力してください]");
+    Scanner sc = new Scanner(System.in);
+    int gameNum = sc.nextInt();// 小数値や文字など整数値以外が入力されることを考慮しなくて良い
+    while (gameNum <= 0) {
+      System.out.println("0以下の数値が入力されたのでもう一度入力し直しましょう");
+      gameNum = sc.nextInt();
+    }
+
+    System.out.println("[CPUの手として任意の数字をゲーム数分だけ入力してください]");
+    // intの範囲を超えた数値が入力されることは考慮しなくて良い
+    // 数が少ない場合，多い場合は考えなくて良い(scannerが指定回数呼ばれるので)
+    int[] cpuHands = new int[gameNum];
+    for (int i = 0; i < gameNum; i++) {
+      cpuHands[i] = sc.nextInt();
+    }
+
+
+    decideEnemyHand(cpuHands);
+    // showArray(cpuHands, gameNum, true);
+
+    int win = 0;
+    int lose = 0;
+    int draw = 0;
+    for (int cpuHand : cpuHands) {
+      System.out.println("[あなたの手を入力してください|gu/choki/pa]");// gu choki pa以外が入力されたときは負けになる
+      String userHand = sc.next();
+
+      switch (janken(hand2num(userHand), cpuHand)) {
+        case 0:
+          draw++;
+          break;
+        case 1:
+          win++;
+          break;
+        case -1:
+          lose++;
+          break;
+      }
+    }
+    System.out.println("じゃんけんを終了します");
+    System.out.println("対戦成績は" + win + "勝" + lose + "敗" + draw + "引き分けでした");
+    sc.close();
+  }
+
+  /*
+   * 0:gu,1:choki,2:pa
+   */
+  public static int janken(int user, int cpu) {
+    if (user == -1) {
+      System.out.println("手の入力が間違っていたのであなたの負けです");
+      // System.out.println("user:" + num2hand(user) + " vs cpu:" + num2hand(cpu) + "
+      // | 手の入力が間違っていたのであなたの負けです");
+      return -1;
+    }
+    int diff = cpu - user;
+    if (diff == 0) {
+      System.out.println("引き分けです");
+      // System.out.println("user:" + num2hand(user) + " vs cpu:" + num2hand(cpu) + "
+      // | 引き分けです");
+      return 0;
+    }
+    if (diff == 1 || diff == -2) {
+      System.out.println("あなたの勝ちです");
+      // System.out.println("user:" + num2hand(user) + " vs cpu:" + num2hand(cpu) + "
+      // | あなたの勝ちです");
+      return 1;
+    }
+    System.out.println("あなたの負けです");
+    // System.out.println("user:" + num2hand(user) + " vs cpu:" + num2hand(cpu) + "
+    // | あなたの負けです");
+    return -1;
+  }
+
+  public static void decideEnemyHand(int[] hands) {
+    System.out.println("CPUの手を決定します");
+    for (int i = 0; i < hands.length; i++) {
+      if (hands[i] < 0) {
+        System.out.println("負の数は正の数に変換します");
+        hands[i] = hands[i] * -1;
+      }
+      hands[i] = hands[i] % 3;
+    }
+  }
+
+  /*
+   * gu:0,choki:1,pa:2
+   */
+  public static int hand2num(String hand) {
+    switch (hand) {
+      case "gu":
+        return 0;
+      case "choki":
+        return 1;
+      case "pa":
+        return 2;
+      default:
+        return -1;// error
+    }
+  }
+
+  /*
+   * 0:gu,1:choki,2:pa
+   */
+  public static String num2hand(int num) {
+    switch (num) {
+      case 0:
+        return "gu";
+      case 1:
+        return "choki";
+      case 2:
+        return "pa";
+      default:
+        return "error";
+    }
+  }
+
+  public static void showArray(int[] inputArray, int num, Boolean mode) {
+    for (int i = 0; i < num; i++) {
+      if (mode) {
+        System.out.print(inputArray[i] + ":" + num2hand(inputArray[i]) + ", ");
+      } else {
+        System.out.print(inputArray[i] + ", ");
+      }
+    }
+    System.out.println();
+  }
+
+}
+
+### 実行例(1)
+$ Java Test02
+[じゃんけんゲームを何回戦実施するか入力してください]
+3  <-
+[CPUの手として任意の数字をゲーム数分だけ入力してください]
+1  <-
+2  <-
+3  <-
+CPUの手を決定します
+[あなたの手を入力してください|gu/choki/pa]
+gu  <-
+あなたの勝ちです
+[あなたの手を入力してください|gu/choki/pa]
+pa  <-
+引き分けです
+[あなたの手を入力してください|gu/choki/pa]
+choki  <-
+あなたの負けです
+じゃんけんを終了します
+対戦成績は1勝1敗1引き分けでした
+
+### 実行例(2)
+$ Java Test02
+[じゃんけんゲームを何回戦実施するか入力してください]
+1  <-
+[CPUの手として任意の数字をゲーム数分だけ入力してください]
+1  <-
+CPUの手を決定します
+[あなたの手を入力してください|gu/choki/pa]
+a  <-
+手の入力が間違っていたのであなたの負けです
+じゃんけんを終了します
+対戦成績は0勝1敗0引き分けでした
+
+### 実行例(3)
+$ Java Test02
+[じゃんけんゲームを何回戦実施するか入力してください]
+-1  <-
+0以下の数値が入力されたのでもう一度入力し直しましょう
+3  <-
+[CPUの手として任意の数字をゲーム数分だけ入力してください]
+-1  <-
+-2  <-
+-3  <-
+CPUの手を決定します
+負の数は正の数に変換します
+負の数は正の数に変換します
+負の数は正の数に変換します
+[あなたの手を入力してください|gu/choki/pa]
+gu  <-
+あなたの勝ちです
+[あなたの手を入力してください|gu/choki/pa]
+gu  <-
+あなたの負けです
+[あなたの手を入力してください|gu/choki/pa]
+gu  <-
+引き分けです
+じゃんけんを終了します
+対戦成績は1勝1敗1引き分けでした
