@@ -13,8 +13,8 @@ chat2.js 25行目～50行目
 ## その他
 
 ### ケーススタディで使用した問題情報
-promptsフォルダ内\n
-分割前の仕様及び解答例\n
+promptsフォルダ内
+分割前の仕様及び解答例
 問題X Test02.java
 問題Y Test04.java
 問題Z Test06.java
